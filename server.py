@@ -7,7 +7,7 @@ import os
 from pymongo import MongoClient
 
 mongoclient = MongoClient(os.environ.get('MONGO_HOST', 'localhost'))
-victim_database = mongoclient["victim_db"]
+helpline_db = mongoclient["helpline_db"]
 
 # receive the phone number
 @route("/upload")
@@ -25,10 +25,9 @@ def registration():
         }
     except KeyError:
         return "<p>Field missing.</p>"
-    if victim_database['volunteer'].find_one({'phone_number': volunteer['phone_number']}):
+    if helpline_db['volunteer'].find_one({'phone_number': volunteer['phone_number']}):
         return "volunteer already exists"
-    victim_database['volunteer'].insert_one(volunteer)
+    helpline_db['volunteer'].insert_one(volunteer)
     return "volunteer added"
-
 
 run(host="0.0.0.0", port = 8080, debug = True)
