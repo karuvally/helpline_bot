@@ -25,6 +25,8 @@ def upload(phone_number):
         "remarks": None,
         "gps": None
     }
+    
+    victims.insert_one(victim_data)
 
 
 # get victim's phone
