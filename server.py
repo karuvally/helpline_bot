@@ -18,6 +18,12 @@ def get_count():
     counter.update_one({"id": "counter"}, {'$inc': {"counter": 1}})
     return counter_value
 
+# get last unprocessed victim id
+def get_unprocessed_victim():
+    result = counter.find_one({"id": "counter"})
+    last_unprocessed = int(result["last_unprocessed"])
+    return last_unprocessed
+
 # receive the phone number
 @route("/upload/<data_string>")
 def upload(data_string):
@@ -44,13 +50,17 @@ def upload(data_string):
 
 
 # get victim's phone
-@route("/get_victim")
+@route("/get_form")
 def get_victim():
-    pass
+    unprocessed_victim_id = get_unprocessed_victim()
+    return victim_details.html
+    #counter.update_one({"id": "counter"}, {'$inc': {"last_unprocessed": 1}})
+
 
 @route('/registration')
 def registration():
     return template('registration')
+
 
 @route('/registration', method='POST')
 def do_registration():
@@ -77,13 +87,14 @@ victims = database.victims
 volunteers = database.volunteers
 counter = database.counter
 
+
 # initialize counter
 if not os.path.exists("counter.lock"):
-    counter.insert_one({"id": "counter", "counter": 0})
+    counter.insert_one({"id": "counter", "counter": 0, "last_processed": 0})
     with open("counter.lock", "w") as lock_file:
         lock_file.write("LOCKED")
 
 get_count() # debug
 
 # run the application
-#run(host="0.0.0.0", port = 8080, debug = True)
+run(host="0.0.0.0", port = 8080, debug = True)
