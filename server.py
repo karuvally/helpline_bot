@@ -19,8 +19,13 @@ def get_count():
     return counter_value
 
 # receive the phone number
-@route("/upload/<phone_number>")
-def upload(phone_number):
+@route("/upload/<data_string>")
+def upload(data_string):
+    splitted_string = data_string.split("&")
+    for string in splitted_string:
+        if string.find("From") != -1:
+            phone_number = string.split("=")[1]
+    
     victim_data = {
         "sl_no": get_count(),
         "phone": phone_number,
