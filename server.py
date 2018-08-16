@@ -13,11 +13,14 @@ def upload():
     # do the stuff
 
 
+# show a victim
+
+
 # the main function
 def main():
     # setup MongoDB
     client = MongoClient()
-    victim_database = client["victim_db"]
+    victim_database = client["helpline_db"]
 
     # run the application
     run(host="0.0.0.0", port = 8080, debug = True)
