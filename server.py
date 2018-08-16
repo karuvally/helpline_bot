@@ -2,7 +2,7 @@
 # HelpLine Bot (alpha release)
 
 # import the serious stuff
-from bottle import route, run, request
+from bottle import route, run, request, template
 import os
 from pymongo import MongoClient
 import time
@@ -35,6 +35,7 @@ def upload(phone_number):
     }
     
     victims.insert_one(victim_data)
+    current_count += 1
 
 
 # get victim's phone
@@ -42,9 +43,12 @@ def upload(phone_number):
 def get_victim():
     pass
 
+@route('/registration')
+def registration():
+    return template('registration')
 
 @route('/registration', method='POST')
-def registration():
+def do_registration():
     try:
         volunteer = {
             'name': request.forms['name'],
@@ -53,9 +57,10 @@ def registration():
         }
     except KeyError:
         return "<p>Field missing.</p>"
-    if database['volunteers'].find_one({'phone_number': volunteer['phone_number']}):
+
+    if volunteers.find_one({'phone_number': volunteer['phone_number']}):
         return "volunteer already exists"
-    database['volunteers'].insert_one(volunteer)
+    volunteers.insert_one(volunteer)
     return "volunteer added"
 
 
