@@ -45,9 +45,9 @@ def registration():
         }
     except KeyError:
         return "<p>Field missing.</p>"
-    if database['volunteer'].find_one({'phone_number': volunteer['phone_number']}):
+    if volunteers.find_one({'phone_number': volunteer['phone_number']}):
         return "volunteer already exists"
-    database['volunteer'].insert_one(volunteer)
+    volunteers.insert_one(volunteer)
     return "volunteer added"
 
 
