@@ -2,7 +2,7 @@
 # HelpLine Bot (alpha release)
 
 # import the serious stuff
-from bottle import route, run, request
+from bottle import route, run, request, template
 import os
 from pymongo import MongoClient
 import time
@@ -14,7 +14,7 @@ helpline_db = mongoclient["helpline_db"]
 @route("/upload/<phone_number>")
 def upload(phone_number):
     victim_data = {
-        "sl_no": current_count += 1, # debug
+        "sl_no": current_count, # debug
         "phone": phone_number,
         "time": time.strftime("[%d-%b-%Y %H:%M:%S]"),
         "name": None,
@@ -27,6 +27,7 @@ def upload(phone_number):
     }
     
     victims.insert_one(victim_data)
+    current_count += 1
 
 
 # get victim's phone
@@ -34,9 +35,12 @@ def upload(phone_number):
 def get_victim():
     pass
 
+@route('/registration')
+def registration():
+    return template('registration')
 
 @route('/registration', method='POST')
-def registration():
+def do_registration():
     try:
         volunteer = {
             'name': request.forms['name'],
