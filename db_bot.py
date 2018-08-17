@@ -7,26 +7,18 @@ from googleapiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
 import time
+import requests
 
 
-# setup essential variables
-SCOPES = "https://www.googleapis.com/auth/spreadsheets"
-#RESCUE_SHEET_ID = "1womn9fd11hBCc3WFkxCf85WX6W9-Xcps7TvQZD57g9c"
-DUMMY_SHEET_ID = "1yFXR5IQ5gmaTPmWxQO5KcxRpmQ3tAOU43u3KxrFfeNc"
+# essential varilables
 victim_details = {}
 
 
 # write entry to sheet
-def write_to_sheet(phone_number, assigned_person):
-    # setup API
-    store = file.Storage("token.json")
-    creds = store.get()
-
-    if not creds or creds.invalid:
-        flow = client.flow_from_clientsecrets("credentials.json", SCOPES)
-        creds = tools.run_flow(flow, store)
-    
-    service = build("sheets", "v4", http = creds.authorize(Http()))
+def write_to_sheet():
+    url = "https://script.google.com/macros/s/AKfycbyirHH2K1rxt2Mhwe5xV9IJvenWVRfny7l64A7P/exec?From={}?Status={}?Comments={}".format(victim_details["victim_phone"],
+    victim_details["assigned_person"], victim_details["comments"])
+    requests.get(url)
 
 
 # read the just commited data
