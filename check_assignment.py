@@ -8,7 +8,7 @@ from oauth2client import file, client, tools
 
 
 # setup essential variables
-SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly"
+SCOPES = "https://www.googleapis.com/auth/spreadsheets"
 RESCUE_SHEET_ID = "1womn9fd11hBCc3WFkxCf85WX6W9-Xcps7TvQZD57g9c"
 RANGE = "number_sheet!A:A"
 
@@ -35,4 +35,3 @@ def check_if_assigned(phone_number):
             return True
     
     return False
-    
