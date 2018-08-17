@@ -34,6 +34,7 @@ def write_to_sheet(phone_number, assigned_person):
 def handle_data():
     victim_phone = request.forms.get("victim_phone")
     assigned_person = request.forms.get("assigned_person")
+    comments = request.forms.get("comments")
 
     victim_details.update({
         "victim_phone": victim_phone,
