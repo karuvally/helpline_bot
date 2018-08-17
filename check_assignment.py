@@ -25,17 +25,6 @@ def check_if_assigned(phone_number):
     
     service = build("sheets", "v4", http = creds.authorize(Http()))
 
-    # check if phone_number exists on the sheet
-    request_body = {
-        "datafilters": [
-            {
-                "developerMetadataLookup": {
-                    "metadataValue": phone_number
-                }
-            }
-        ]
-    }
-
     request = service.spreadsheets().values().get(spreadsheetId = RESCUE_SHEET_ID,
     range = RANGE)
     
