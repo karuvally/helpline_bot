@@ -9,10 +9,8 @@ from oauth2client import file, client, tools
 
 # setup essential variables
 SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly"
-
-KTU_SHEET_ID = "15Bak2AfYPpc7JHFsvGIqppLxN0JCrBRmIUWOO8svAdA"
-RANGE = "A1:A5"
-#RESCUE_SHEET_ID = "1womn9fd11hBCc3WFkxCf85WX6W9-Xcps7TvQZD57g9c"
+RESCUE_SHEET_ID = "1womn9fd11hBCc3WFkxCf85WX6W9-Xcps7TvQZD57g9c"
+RANGE = "number_sheet!A:A"
 
 
 # check if assigned to a person
@@ -38,7 +36,7 @@ def check_if_assigned(phone_number):
         ]
     }
 
-    request = service.spreadsheets().values().get(spreadsheetId = KTU_SHEET_ID,
+    request = service.spreadsheets().values().get(spreadsheetId = RESCUE_SHEET_ID,
     range = RANGE)
     
     response = request.execute()
