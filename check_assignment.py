@@ -35,3 +35,4 @@ def check_if_assigned(phone_number):
             return True
     
     return False
+    
