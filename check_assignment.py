@@ -34,3 +34,14 @@ def check_if_assigned(phone_number):
             }
         ]
     }
+
+    request = service.spreadsheets().developerMetadata().search(
+        spreadsheetId = SPREADSHEET_ID,
+         body = request_body)
+    
+    response = request.execute()
+
+    print(response) # debug
+
+
+check_if_assigned("7907666801")
