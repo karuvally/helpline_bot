@@ -39,7 +39,7 @@ def check_if_assigned(phone_number):
     }
 
     request = service.spreadsheets().values().get(spreadsheetId = KTU_SHEET_ID,
-    range = range)
+    range = RANGE)
     
     response = request.execute()
 
