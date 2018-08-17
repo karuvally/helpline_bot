@@ -24,5 +24,13 @@ def check_if_assigned(phone_number):
     
     service = build("sheets", "v4", http = creds.authorize(Http()))
 
-    
-
+    # check if phone_number exists on the sheet
+    request_body = {
+        "datafilters": [
+            {
+                "developerMetadataLookup": {
+                    "metadataValue": str(phone_number)
+                }
+            }
+        ]
+    }
