@@ -30,7 +30,7 @@ def check_if_assigned(phone_number):
         "datafilters": [
             {
                 "developerMetadataLookup": {
-                    "metadataValue": str(phone_number)
+                    "metadataValue": phone_number
                 }
             }
         ]
@@ -40,8 +40,14 @@ def check_if_assigned(phone_number):
     range = RANGE)
     
     response = request.execute()
+    
+    for number in response["values"]:
+        if number[0] == phone_number:
+            return True
+    
+    return False
+        
 
-    print(response) # debug
 
-
-check_if_assigned("7907666801")
+result = check_if_assigned("7907666801")
+print(result)
