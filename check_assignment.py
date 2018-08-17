@@ -46,8 +46,3 @@ def check_if_assigned(phone_number):
             return True
     
     return False
-        
-
-
-result = check_if_assigned("7907666801")
-print(result)
