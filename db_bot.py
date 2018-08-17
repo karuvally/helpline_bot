@@ -38,6 +38,6 @@ def handle_data():
     victim_details.update({
         "victim_phone": victim_phone,
         "assigned_person": assigned_person,
-        "timestamp": "debug!!!" # reference: 17/08/2018 00:15:33
+        "timestamp": time.strftime("%d/%b/%Y %H:%M:%S") # reference: 17/08/2018 00:15:33
         })
     
