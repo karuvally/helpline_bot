@@ -51,15 +51,10 @@ def upload(data_string):
 
 # get victim's phone
 @route("/get_form")
-def get_victim():
+def get_form():
     unprocessed_victim_id = get_unprocessed_victim()
     return victim_details.html
     #counter.update_one({"id": "counter"}, {'$inc': {"last_unprocessed": 1}})
-
-
-@route('/registration')
-def registration():
-    return template('registration')
 
 
 @route('/registration', method='POST')
